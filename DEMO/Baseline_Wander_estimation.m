@@ -1,3 +1,4 @@
+
 function varargout = Baseline_Wander_estimation(varargin)
 % Baseline_Wander_estimation MATLAB code for Baseline_Wander_estimation.fig
 %      Baseline_Wander_estimation, by itself, creates a new Baseline_Wander_estimation or raises the existing
@@ -699,5 +700,26 @@ else
     set(handles.text6,'Visible','off');
     set(handles.uipanel1,'Visible','off');
     set(handles.popupmenu1,'Value',1);
+
+% Trajectory plot
+figure;
+plot(gazeX, gazeY, 'LineWidth', 1.5);
+hold on;
+plot(gazeX(1), gazeY(1), 'go'); % start
+plot(gazeX(end), gazeY(end), 'ro'); % end
+xlabel('Gaze X'); ylabel('Gaze Y');
+title('Eye Trajectory');
+axis equal;
+grid on;
+saveas(gcf, 'PD_trajectory.png');
+
+% Heatmap plot
+figure;
+histogram2(gazeX, gazeY, 50, 'DisplayStyle','tile','ShowEmptyBins','on');
+colorbar;
+xlabel('Gaze X'); ylabel('Gaze Y');
+title('Gaze Heatmap');
+saveas(gcf, 'PD_heatmap.png');
+
     
 end
